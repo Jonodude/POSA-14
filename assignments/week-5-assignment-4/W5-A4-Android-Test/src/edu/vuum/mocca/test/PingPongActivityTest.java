@@ -63,6 +63,10 @@ public class PingPongActivityTest
      * this class a @Test method TODO find better explanation, 100%
      * proper.
      */
+     
+     // regular expression constant of things to be removed from comparison strings
+    private static final String WSEXP = "[ \n\r\b\f\t]+"; 
+	
     public void testPlayPingPongButtonPress() throws Exception {
         Thread.sleep(TestOptions.ACCEPTABLE_STARTUP_LENGTH);
 
@@ -75,7 +79,7 @@ public class PingPongActivityTest
         // wait for the threads to execute
         Thread.sleep(TestOptions.ACCEPTABLE_RUNTIME_LENGTH);
 
-        assertTrue(outputTextView_.getText().toString()
-                   .equals(TestOptions.ANDROID_TEXTVIEW));
+        assertTrue(outputTextView_.getText().toString().replaceAll(WSEXP , "")
+                   .equals(TestOptions.ANDROID_TEXTVIEW.replaceAll(WSEXP , "")));
     }
 }
